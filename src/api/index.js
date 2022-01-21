@@ -1,5 +1,5 @@
 const express = require("express");
-//const routes = require("./routes");
+const routes = require("./routes");
 const cors = require("cors");
 
 //INITIALIZATIONS
@@ -8,7 +8,7 @@ app.use(cors({ origin: "*" }));
 app.use(express.json());
 
 //ROUTES
-//app.use(routes);
+app.use(routes);
 
 //EXPORTING
 module.exports = app;
