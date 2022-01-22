@@ -7,7 +7,7 @@ const router = express.Router()
 //ROUTES
 router.use("/auth", auth)
 router.use("/dashboard", dashboard)
-
+router.use("/dashboardAdmin", dashboardAdmin)
 
 //EXPORT
 module.exports = router
