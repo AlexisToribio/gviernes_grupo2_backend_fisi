@@ -11,7 +11,7 @@ module.exports = {
                     "descripcion_evento, u.foto AS foto_coordinador, e.nombre_coordinador FROM eventos AS e JOIN usuarios " +
                     "AS u ON e.id_coordinador = u.id JOIN tipos_coordinador AS tco ON tco.id = e.tipo_coordinador JOIN " +
                     "tipos_inscripcion AS ti  ON ti.id = e.tipo_inscripcion JOIN tipos_certificado AS tc ON tc.id = e.tipo_certificado " +
-                    "JOIN tipos_ambiente AS ta ON ta.id = e.tipo_ambiente WHERE e.id = ?"
+                    "JOIN tipos_ambiente AS ta ON ta.id = e.tipo_ambiente JOIN solicitudes AS s ON s.id_evento = e.id WHERE e.id = ? AND s.Estado = 2"
     ,
     insertInscription: "INSERT INTO inscripciones SET ?"
     ,

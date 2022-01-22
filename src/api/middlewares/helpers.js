@@ -57,6 +57,8 @@ helpers.isLoggedIn = async (req, res, next) => {
 
 helpers.isLoggedInAdmin = async (req, res, next) => {
 
+    console.log(req.user)
+
     if (req.user.tipo_usuario === "S") {
 
         return next();
