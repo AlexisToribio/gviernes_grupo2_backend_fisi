@@ -1,5 +1,6 @@
 const auth = require("./auth")
 const dashboard = require("./dashboard")
+const dashboardAdmin = require("./dashboardAdmin")
 const express = require("express")
 const router = express.Router()
 
