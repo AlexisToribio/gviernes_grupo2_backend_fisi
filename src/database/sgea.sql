@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 20-01-2022 a las 16:44:37
+-- Tiempo de generación: 25-01-2022 a las 01:47:02
 -- Versión del servidor: 8.0.21
 -- Versión de PHP: 7.3.21
 
@@ -15,7 +15,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Base de datos: `sgea`
@@ -54,7 +54,15 @@ CREATE TABLE IF NOT EXISTS `eventos` (
   KEY `fk_tipo_inscripcion_id` (`tipo_inscripcion`),
   KEY `fk_tipo_certificado_id` (`tipo_certificado`),
   KEY `fk_tipo_ambiente_id` (`tipo_ambiente`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `eventos`
+--
+
+INSERT INTO `eventos` (`id`, `titulo`, `tipo_coordinador`, `nombre_coordinador`, `id_coordinador`, `tipo_evento`, `fecha_inicio`, `fecha_fin`, `hora_inicio`, `duracion`, `tipo_inscripcion`, `precio_inscripcion`, `descripcion`, `tipo_certificado`, `precio_certificado`, `tipo_ambiente`, `participantes`, `logo`) VALUES
+(6, 'bla', 1, 'nose', 1, 'E001', '2022-01-31', '2022-02-10', '09:00:00', 1, 1, NULL, 'bla', 1, NULL, 'A001', 10, ''),
+(5, 'bla', 1, 'nose', 1, 'E001', '2022-01-31', '2022-02-10', '09:00:00', 1, 1, NULL, 'bla', 1, NULL, 'A001', 10, '');
 
 -- --------------------------------------------------------
 
@@ -73,7 +81,14 @@ CREATE TABLE IF NOT EXISTS `inscripciones` (
   PRIMARY KEY (`id`),
   KEY `fk_evento_id` (`id_evento`),
   KEY `fk_usuario_id` (`id_usuario`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `inscripciones`
+--
+
+INSERT INTO `inscripciones` (`id`, `id_evento`, `id_usuario`, `certificado`, `voucher`, `fecha_inscripcion`) VALUES
+(1, 5, 1, 0, '', '2022-01-22 02:49:27');
 
 -- --------------------------------------------------------
 
@@ -93,7 +108,15 @@ CREATE TABLE IF NOT EXISTS `solicitudes` (
   UNIQUE KEY `codigo` (`codigo`),
   KEY `fk_estado_id` (`estado`),
   KEY `fk_evento_id` (`id_evento`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `solicitudes`
+--
+
+INSERT INTO `solicitudes` (`id`, `codigo`, `estado`, `id_evento`, `fecha_envio`, `observaciones`) VALUES
+(2, 'FISI2022-5', 2, 5, '2022-01-21 02:13:46', NULL),
+(3, 'FISI2022-6', 3, 6, '2022-01-22 01:39:38', NULL);
 
 -- --------------------------------------------------------
 
@@ -106,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `tipos_ambiente` (
   `id` varchar(4) NOT NULL,
   `descripcion` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Volcado de datos para la tabla `tipos_ambiente`
@@ -130,7 +153,7 @@ CREATE TABLE IF NOT EXISTS `tipos_certificado` (
   `id` tinyint(1) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(9) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Volcado de datos para la tabla `tipos_certificado`
@@ -152,7 +175,7 @@ CREATE TABLE IF NOT EXISTS `tipos_coordinador` (
   `id` tinyint(1) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Volcado de datos para la tabla `tipos_coordinador`
@@ -173,7 +196,7 @@ CREATE TABLE IF NOT EXISTS `tipos_estado` (
   `id` int NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(9) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Volcado de datos para la tabla `tipos_estado`
@@ -196,7 +219,7 @@ CREATE TABLE IF NOT EXISTS `tipos_evento` (
   `id` varchar(4) NOT NULL,
   `descripcion` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Volcado de datos para la tabla `tipos_evento`
@@ -220,7 +243,7 @@ CREATE TABLE IF NOT EXISTS `tipos_inscripcion` (
   `id` tinyint(1) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(8) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Volcado de datos para la tabla `tipos_inscripcion`
@@ -239,7 +262,7 @@ INSERT INTO `tipos_inscripcion` (`id`, `descripcion`) VALUES
 DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE IF NOT EXISTS `usuarios` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `nombres` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `nombres` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `apellidos` varchar(100) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(100) NOT NULL,
@@ -251,7 +274,15 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `foto` varchar(256) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `nombres`, `apellidos`, `email`, `password`, `edad`, `celular`, `sexo`, `ocupacion`, `tipo_usuario`, `foto`) VALUES
+(1, 'Joaquin', 'Torres Ortega', 'joaquin.torres@unmsm.edu.pe', '$2b$10$j0FtL5c5rBwn7bPZ7761XuhRoQbllzEQTOUKPbi2d/kA90yFFgZUu', 22, '945816293', 'MASCULINO', 'estudiante', 'N', 'feo'),
+(2, 'Cesar', 'Cacho Leon', 'cesar.cacho@unmsm.edu.pe', '$2b$10$ryzkEboKgrnpRvxmvOpPQOgy4T8SR8Pnc009vQD/GSD0DlfYWLQOC', 22, '987456321', 'MASCULINO', 'estudiante', 'S', 'feo2');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
