@@ -99,7 +99,7 @@ module.exports = {
 
     const result = await db.query(query.insertEvent, [newEvent]);
 
-    const codigoRequest = "2022-" + result.insertId;
+    const codigoRequest = "FISI2022-" + result.insertId;
 
     const newRequest = {
       id: null,
