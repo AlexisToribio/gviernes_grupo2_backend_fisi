@@ -1,128 +1,6 @@
--- phpMyAdmin SQL Dump
--- version 5.0.2
--- https://www.phpmyadmin.net/
---
--- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 25-01-2022 a las 01:47:02
--- Versión del servidor: 8.0.21
--- Versión de PHP: 7.3.21
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Base de datos: `sgea`
---
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `eventos`
---
-
-DROP TABLE IF EXISTS `eventos`;
-CREATE TABLE IF NOT EXISTS `eventos` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `titulo` varchar(100) NOT NULL,
-  `tipo_coordinador` tinyint(1) NOT NULL,
-  `nombre_coordinador` varchar(50) NOT NULL,
-  `id_coordinador` int NOT NULL,
-  `tipo_evento` varchar(4) NOT NULL,
-  `fecha_inicio` date NOT NULL,
-  `fecha_fin` date NOT NULL,
-  `hora_inicio` time NOT NULL,
-  `duracion` tinyint NOT NULL,
-  `tipo_inscripcion` tinyint(1) NOT NULL,
-  `precio_inscripcion` smallint DEFAULT NULL,
-  `descripcion` text NOT NULL,
-  `tipo_certificado` tinyint(1) NOT NULL,
-  `precio_certificado` smallint DEFAULT NULL,
-  `tipo_ambiente` varchar(4) NOT NULL,
-  `participantes` smallint NOT NULL,
-  `logo` varchar(256) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_coordinador_id` (`id_coordinador`),
-  KEY `fk_tipo_coordinador_id` (`tipo_coordinador`),
-  KEY `fk_tipo_evento_id` (`tipo_evento`),
-  KEY `fk_tipo_inscripcion_id` (`tipo_inscripcion`),
-  KEY `fk_tipo_certificado_id` (`tipo_certificado`),
-  KEY `fk_tipo_ambiente_id` (`tipo_ambiente`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Volcado de datos para la tabla `eventos`
---
-
-INSERT INTO `eventos` (`id`, `titulo`, `tipo_coordinador`, `nombre_coordinador`, `id_coordinador`, `tipo_evento`, `fecha_inicio`, `fecha_fin`, `hora_inicio`, `duracion`, `tipo_inscripcion`, `precio_inscripcion`, `descripcion`, `tipo_certificado`, `precio_certificado`, `tipo_ambiente`, `participantes`, `logo`) VALUES
-(6, 'bla', 1, 'nose', 1, 'E001', '2022-01-31', '2022-02-10', '09:00:00', 1, 1, NULL, 'bla', 1, NULL, 'A001', 10, ''),
-(5, 'bla', 1, 'nose', 1, 'E001', '2022-01-31', '2022-02-10', '09:00:00', 1, 1, NULL, 'bla', 1, NULL, 'A001', 10, '');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `inscripciones`
---
-
-DROP TABLE IF EXISTS `inscripciones`;
-CREATE TABLE IF NOT EXISTS `inscripciones` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `id_evento` int NOT NULL,
-  `id_usuario` int NOT NULL,
-  `certificado` tinyint(1) NOT NULL,
-  `voucher` varchar(255) DEFAULT NULL,
-  `fecha_inscripcion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `fk_evento_id` (`id_evento`),
-  KEY `fk_usuario_id` (`id_usuario`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Volcado de datos para la tabla `inscripciones`
---
-
-INSERT INTO `inscripciones` (`id`, `id_evento`, `id_usuario`, `certificado`, `voucher`, `fecha_inscripcion`) VALUES
-(1, 5, 1, 0, '', '2022-01-22 02:49:27');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `solicitudes`
---
-
-DROP TABLE IF EXISTS `solicitudes`;
-CREATE TABLE IF NOT EXISTS `solicitudes` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `codigo` varchar(10) NOT NULL,
-  `estado` int NOT NULL,
-  `id_evento` int NOT NULL,
-  `fecha_envio` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `observaciones` text,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `codigo` (`codigo`),
-  KEY `fk_estado_id` (`estado`),
-  KEY `fk_evento_id` (`id_evento`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Volcado de datos para la tabla `solicitudes`
---
-
-INSERT INTO `solicitudes` (`id`, `codigo`, `estado`, `id_evento`, `fecha_envio`, `observaciones`) VALUES
-(2, 'FISI2022-5', 2, 5, '2022-01-21 02:13:46', NULL),
-(3, 'FISI2022-6', 3, 6, '2022-01-22 01:39:38', NULL);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tipos_ambiente`
---
+create database SGEA_MOVIL;
+use SGEA_MOVIL;
 
 DROP TABLE IF EXISTS `tipos_ambiente`;
 CREATE TABLE IF NOT EXISTS `tipos_ambiente` (
@@ -253,6 +131,104 @@ INSERT INTO `tipos_inscripcion` (`id`, `descripcion`) VALUES
 (1, 'GRATUITO'),
 (2, 'PAGO');
 
+
+DROP TABLE IF EXISTS `eventos`;
+CREATE TABLE IF NOT EXISTS `eventos` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(100) NOT NULL,
+  `tipo_coordinador` tinyint(1) NOT NULL,
+  `nombre_coordinador` varchar(50) NOT NULL,
+  `id_coordinador` int NOT NULL,
+  `tipo_evento` varchar(4) NOT NULL,
+  `fecha_inicio` date NOT NULL,
+  `fecha_fin` date NOT NULL,
+  `hora_inicio` time NOT NULL,
+  `duracion` tinyint NOT NULL,
+  `tipo_inscripcion` tinyint(1) NOT NULL,
+  `precio_inscripcion` smallint DEFAULT NULL,
+  `descripcion` text NOT NULL,
+  `tipo_certificado` tinyint(1) NOT NULL,
+  `precio_certificado` smallint DEFAULT NULL,
+  `tipo_ambiente` varchar(4) NOT NULL,
+  `participantes` smallint NOT NULL,
+  `logo` varchar(256) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_coordinador_id` (`id_coordinador`),
+  KEY `fk_tipo_coordinador_id` (`tipo_coordinador`),
+  KEY `fk_tipo_evento_id` (`tipo_evento`),
+  KEY `fk_tipo_inscripcion_id` (`tipo_inscripcion`),
+  KEY `fk_tipo_certificado_id` (`tipo_certificado`),
+  KEY `fk_tipo_ambiente_id` (`tipo_ambiente`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `eventos`
+--
+
+INSERT INTO `eventos` (`id`, `titulo`, `tipo_coordinador`, `nombre_coordinador`, `id_coordinador`, `tipo_evento`, `fecha_inicio`, `fecha_fin`, `hora_inicio`, `duracion`, `tipo_inscripcion`, `precio_inscripcion`, `descripcion`, `tipo_certificado`, `precio_certificado`, `tipo_ambiente`, `participantes`, `logo`) VALUES
+(6, 'bla', 1, 'nose', 1, 'E001', '2022-01-31', '2022-02-10', '09:00:00', 1, 1, NULL, 'bla', 1, NULL, 'A001', 10, ''),
+(5, 'bla', 1, 'nose', 1, 'E001', '2022-01-31', '2022-02-10', '09:00:00', 1, 1, NULL, 'bla', 1, NULL, 'A001', 10, '');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `inscripciones`
+--
+
+DROP TABLE IF EXISTS `inscripciones`;
+CREATE TABLE IF NOT EXISTS `inscripciones` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_evento` int NOT NULL,
+  `id_usuario` int NOT NULL,
+  `certificado` tinyint(1) NOT NULL,
+  `voucher` varchar(255) DEFAULT NULL,
+  `fecha_inscripcion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `fk_evento_id` (`id_evento`),
+  KEY `fk_usuario_id` (`id_usuario`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `inscripciones`
+--
+
+INSERT INTO `inscripciones` (`id`, `id_evento`, `id_usuario`, `certificado`, `voucher`, `fecha_inscripcion`) VALUES
+(1, 5, 1, 0, '', '2022-01-22 02:49:27');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `solicitudes`
+--
+
+DROP TABLE IF EXISTS `solicitudes`;
+CREATE TABLE IF NOT EXISTS `solicitudes` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `codigo` varchar(12) NOT NULL,
+  `estado` int NOT NULL,
+  `id_evento` int NOT NULL,
+  `fecha_envio` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `observaciones` text,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `codigo` (`codigo`),
+  KEY `fk_estado_id` (`estado`),
+  KEY `fk_evento_id` (`id_evento`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `solicitudes`
+--
+
+INSERT INTO `solicitudes` (`id`, `codigo`, `estado`, `id_evento`, `fecha_envio`, `observaciones`) VALUES
+(2, 'FISI2022-5', 2, 5, '2022-01-21 02:13:46', NULL),
+(3, 'FISI2022-6', 3, 6, '2022-01-22 01:39:38', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipos_ambiente`
+--
+
 -- --------------------------------------------------------
 
 --
@@ -285,6 +261,3 @@ INSERT INTO `usuarios` (`id`, `nombres`, `apellidos`, `email`, `password`, `edad
 (2, 'Cesar', 'Cacho Leon', 'cesar.cacho@unmsm.edu.pe', '$2b$10$ryzkEboKgrnpRvxmvOpPQOgy4T8SR8Pnc009vQD/GSD0DlfYWLQOC', 22, '987456321', 'MASCULINO', 'estudiante', 'S', 'feo2');
 COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

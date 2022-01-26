@@ -7,7 +7,7 @@ async function startServer() {
 
     await app.listen(PORT, () => {
 
-        console.log(`Server running on localhost:${PORT}`)
+        console.log(`Server running on http://localhost:${PORT}`)
     })
     .on("error", (err) => {
 
