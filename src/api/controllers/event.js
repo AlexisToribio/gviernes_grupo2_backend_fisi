@@ -53,11 +53,7 @@ module.exports = {
 
     const closeOnes = await db.query(query.getMyEvents, [id]);
 
-    if (closeOnes.length > 0) {
-      res.status(200).json({ data: closeOnes, message: "My events" });
-    } else {
-      res.status(400).json({ data: null, message: "No found events" });
-    }
+    res.status(200).json({ data: closeOnes, message: "My events" });
   },
   executeEventRegister: async (req, res) => {
     const id_coordinador = req.user.id;
